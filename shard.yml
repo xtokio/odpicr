@@ -1,0 +1,9 @@
+name: odpicr
+version: 0.1.0
+
+authors:
+  - xtokio <xtokio@gmail.com>
+
+crystal: 1.8.2
+
+license: MIT
