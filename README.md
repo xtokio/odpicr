@@ -30,6 +30,8 @@ sudo make install
 
    ```yaml
    dependencies:
+     db:
+       github: crystal-lang/crystal-db
      odpicr:
        github: xtokio/odpicr
    ```
