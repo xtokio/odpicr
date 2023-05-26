@@ -2,7 +2,7 @@ module ODPI
   class Statement < DB::Statement
     @raw_stmt : LibODPI::DpiStmt*
     @query : Bytes
-    @num_cols : UInt32?
+    @num_cols : Int32?
     getter raw_stmt
 
     def initialize(connection, query : String)
@@ -42,7 +42,7 @@ module ODPI
         LibODPI.dpi_conn_commit(raw_conn)
       end
 
-      ResultSet.new(self, num_cols)
+      ResultSet.new(self, num_cols.to_i32)
     end
 
     protected def perform_exec(args : Enumerable) : DB::ExecResult

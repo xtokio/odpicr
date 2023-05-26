@@ -3,7 +3,7 @@ module ODPI
     @name : String
     @value : LibODPI::DpiData*
     @typenum : LibODPI::DpiNativeTypeNum
-    @length : UInt32?
+    @length : Int32?
 
     getter name, typenum, length
 
@@ -27,7 +27,7 @@ module ODPI
     @col_names : Array(String)
     @data_buffer : LibODPI::DpiData*
     @error_info : LibODPI::DpiErrorInfo
-    @num_cols : UInt32
+    @num_cols : Int32
     @raw_context : LibODPI::DpiContext*
     @raw_stmt : LibODPI::DpiStmt*
 
