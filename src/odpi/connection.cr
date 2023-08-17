@@ -5,8 +5,26 @@ module ODPI
     @details : String?
     getter raw_conn, raw_context
 
-    def initialize(context : DB::ConnectionContext)
-      super
+    record Options, 
+      host : String,
+      port : Int32?,
+      path : String?,
+      user : String,
+      password : String do
+      def self.from_uri(uri : URI) : Options
+        host = uri.hostname || raise "no host was provided"
+        port = uri.port
+        path = uri.path
+        user = uri.user || raise "username is missing"
+        password = uri.password || raise "password is missing"
+
+        Options.new(host: host, port: port, path: path, user: user, password: password)
+      end
+    end
+
+    def initialize(options : ::DB::Connection::Options, odpi_options : Options)
+      super(options)
+
       @raw_conn = Pointer(LibODPI::DpiConn).null
       @raw_context = Pointer(LibODPI::DpiContext).null
 
@@ -18,16 +36,16 @@ module ODPI
         puts String.new(error.message)
       end
 
-      user = context.uri.user.not_nil!.to_slice()
+      user = odpi_options.user.not_nil!.to_slice()
       user_len = user.size
       user = user.to_unsafe.as(Pointer(LibODPI::UserName))
 
-      password = context.uri.password.not_nil!.to_slice
+      password = odpi_options.password.not_nil!.to_slice
       conn_string =
-        if context.uri.port != nil
-          "#{context.uri.host}:#{context.uri.port}#{context.uri.path}".to_slice
+        if odpi_options.port != nil
+          "#{odpi_options.host}:#{odpi_options.port}#{odpi_options.path}".to_slice
         else
-          "#{context.uri.host}#{context.uri.path}".to_slice
+          "#{odpi_options.host}#{odpi_options.path}".to_slice
         end
 
       common_params = Pointer(LibODPI::DpiCommonCreateParams).null
