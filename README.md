@@ -16,14 +16,17 @@ sudo apt install unixodbc-dev
 https://github.com/oracle/odpi/releases
 
 # Unzip file
-tar -xvf v4.6.1.tar.gz
+tar -xvf v5.0.1.tar.gz
 
-# Change to folder v4.6.1
-cd v4.6.1
+# Change to folder v5.0.1
+cd v5.0.1
 
 # Make and Install
 sudo make
 sudo make install
+
+# Activate default path /usr/local/lib
+ldconfig
 ```
 
 1. Add the dependency to your `shard.yml`:

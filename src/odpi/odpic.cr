@@ -2,8 +2,8 @@
 lib LibODPI
 
   # define ODPI-C version information
-  DPI_MAJOR_VERSION = 4
-  DPI_MINOR_VERSION = 4
+  DPI_MAJOR_VERSION = 5
+  DPI_MINOR_VERSION = 0
 
   # define constants for success and failure of methods
   DPI_SUCCESS = 0
