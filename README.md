@@ -12,6 +12,9 @@ Fork from [crystal-odpi](https://github.com/silkPK/crystal-odpi) library.
 # Install Unix ODBC
 sudo apt install unixodbc-dev
 
+# Install Libaio
+sudo apt install libaio1
+
 # Download latest release
 https://github.com/oracle/odpi/releases
 
